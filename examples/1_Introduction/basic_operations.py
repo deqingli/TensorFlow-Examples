@@ -14,6 +14,8 @@ import tensorflow as tf
 # of the Constant op.
 a = tf.constant(2)
 b = tf.constant(3)
+print("a = %s" % a)
+print('b = %s' % b)
 
 # Launch the default graph.
 with tf.Session() as sess:
@@ -58,6 +60,9 @@ matrix2 = tf.constant([[2.],[2.]])
 # multiplication.
 product = tf.matmul(matrix1, matrix2)
 
+print('product = %s' % product)
+print('------------------------')
+
 # To run the matmul op we call the session 'run()' method, passing 'product'
 # which represents the output of the matmul op.  This indicates to the call
 # that we want to get the output of the matmul op back.
@@ -73,3 +78,9 @@ with tf.Session() as sess:
     result = sess.run(product)
     print(result)
     # ==> [[ 12.]]
+
+# 上下文管理器的内容，在外面依然可以访问
+print('--------', result)
+
+# 即使在 session 运行结束之后，product 依然只是 matmul operation 的 placeholder
+print('*****', product)
