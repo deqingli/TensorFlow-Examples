@@ -44,6 +44,7 @@ def mean_square_fn(model_fn, inputs, labels):
 
 # SGD Optimizer
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+
 # Compute gradients
 grad = tfe.implicit_gradients(mean_square_fn)
 

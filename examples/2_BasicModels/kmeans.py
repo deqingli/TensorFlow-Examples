@@ -22,7 +22,8 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 # Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
+
+mnist = input_data.read_data_sets("../../../MNIST_data/", one_hot=True)
 full_data_x = mnist.train.images
 
 # Parameters
@@ -75,6 +76,7 @@ for i in range(1, num_steps + 1):
 # Count total number of labels per centroid, using the label of each training
 # sample to their closest centroid (given by 'idx')
 counts = np.zeros(shape=(k, num_classes))
+
 for i in range(len(idx)):
     counts[idx[i]] += mnist.train.labels[i]
 # Assign the most frequent label to the centroid
@@ -84,6 +86,7 @@ labels_map = tf.convert_to_tensor(labels_map)
 # Evaluation ops
 # Lookup: centroid_id -> label
 cluster_label = tf.nn.embedding_lookup(labels_map, cluster_idx)
+
 # Compute accuracy
 correct_prediction = tf.equal(cluster_label, tf.cast(tf.argmax(Y, 1), tf.int32))
 accuracy_op = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))

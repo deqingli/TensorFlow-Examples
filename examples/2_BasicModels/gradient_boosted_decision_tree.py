@@ -25,8 +25,13 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 # Set verbosity to display errors only (Remove this line for showing warnings)
 tf.logging.set_verbosity(tf.logging.ERROR)
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets("/tmp/data/", one_hot=False,
-                                  source_url='http://yann.lecun.com/exdb/mnist/')
+
+# mnist = input_data.read_data_sets("/tmp/data/", one_hot=False,
+#                                   source_url='http://yann.lecun.com/exdb/mnist/')
+
+mnist = input_data.read_data_sets("../../../MNIST_data/", one_hot=False)
+
+print(mnist)
 
 # Parameters
 batch_size = 4096 # The number of samples per batch
@@ -67,10 +72,13 @@ gbdt_model = GradientBoostedDecisionTreeClassifier(
 # Display TF info logs
 tf.logging.set_verbosity(tf.logging.INFO)
 
+# print(mnist)
+
 # Define the input function for training
 input_fn = tf.estimator.inputs.numpy_input_fn(
     x={'images': mnist.train.images}, y=mnist.train.labels,
     batch_size=batch_size, num_epochs=None, shuffle=True)
+
 # Train the Model
 gbdt_model.fit(input_fn=input_fn, max_steps=max_steps)
 
@@ -79,6 +87,7 @@ gbdt_model.fit(input_fn=input_fn, max_steps=max_steps)
 input_fn = tf.estimator.inputs.numpy_input_fn(
     x={'images': mnist.test.images}, y=mnist.test.labels,
     batch_size=batch_size, shuffle=False)
+
 # Use the Estimator 'evaluate' method
 e = gbdt_model.evaluate(input_fn=input_fn)
 
