@@ -31,6 +31,7 @@ sess = tf.Session()
 # Create a dataset tensor from the images and the labels
 dataset = tf.data.Dataset.from_tensor_slices(
     (mnist.train.images, mnist.train.labels))
+    
 # Automatically refill the data queue when empty
 dataset = dataset.repeat()
 # Create batches of data

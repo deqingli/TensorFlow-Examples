@@ -53,8 +53,10 @@ init = tf.global_variables_initializer()
 
 # Create a summary to monitor cost tensor
 tf.summary.scalar("loss", cost)
+
 # Create a summary to monitor accuracy tensor
 tf.summary.scalar("accuracy", acc)
+
 # Merge all summaries into a single op
 merged_summary_op = tf.summary.merge_all()
 

@@ -89,15 +89,20 @@ model = tf.estimator.Estimator(model_fn)
 input_fn = tf.estimator.inputs.numpy_input_fn(
     x={'images': mnist.train.images}, y=mnist.train.labels,
     batch_size=batch_size, num_epochs=None, shuffle=True)
+
 # Train the Model
 model.train(input_fn, steps=num_steps)
 
 # Evaluate the Model
 # Define the input function for evaluating
 input_fn = tf.estimator.inputs.numpy_input_fn(
-    x={'images': mnist.test.images}, y=mnist.test.labels,
-    batch_size=batch_size, shuffle=False)
+    x={'images': mnist.test.images}, 
+    y=mnist.test.labels,
+    batch_size=batch_size, 
+    shuffle=False
+)
+
 # Use the Estimator 'evaluate' method
-e = model.evaluate(input_fn)
+e = model.evaluate( )
 
 print("Testing Accuracy:", e['accuracy'])

@@ -76,9 +76,11 @@ with tf.name_scope('Loss'):
 with tf.name_scope('SGD'):
     # Gradient Descent
     optimizer = tf.train.GradientDescentOptimizer(learning_rate)
+
     # Op to calculate every variable gradient
     grads = tf.gradients(loss, tf.trainable_variables())
     grads = list(zip(grads, tf.trainable_variables()))
+
     # Op to update all variables according to their gradient
     apply_grads = optimizer.apply_gradients(grads_and_vars=grads)
 
@@ -100,6 +102,7 @@ for var in tf.trainable_variables():
 # Summarize all gradients
 for grad, var in grads:
     tf.summary.histogram(var.name + '/gradient', grad)
+    
 # Merge all summaries into a single op
 merged_summary_op = tf.summary.merge_all()
 
